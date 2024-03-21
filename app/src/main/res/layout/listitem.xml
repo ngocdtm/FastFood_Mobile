@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="30dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/coffeeImage"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_launcher_background"/>
+            <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginRight="12dp"
+                android:layout_below="@+id/coffeeName"
+                android:layout_marginLeft="12dp"
+                android:id="@+id/description"
+                android:layout_toRightOf="@+id/coffeeImage"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/coffeeName"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/coffeeImage"
+                android:textColor="@color/black"
+                android:text="Green Tea"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/description"
+                android:layout_toRightOf="@+id/coffeeImage"
+                android:id="@+id/clickheretoorder"
+                android:layout_marginLeft="12dp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:text="Click  to Order"/>
+
+            </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

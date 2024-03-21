@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name" translatable="true">FoodNhanh</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="greentea" translatable="false">Zummy</string>
+    <string name="latte" translatable="false">Good</string>
+    <string name="orangesmoothie" translatable="false">Perfect</string>
+    <string name="orangevanilla" translatable="false">Delicious</string>
+    <string name="cappcuni" translatable="false">Very Good</string>
+    <string name="thaitea" translatable="false">Wow</string>
+    <string name="tea" translatable="false">Oh Good</string>
+    <string name="bubbletea" translatable="false">Healthy</string>
+    <string name="match" translatable="false">Try</string>
+    <string name="popular_product">Popular Product</string>
+    <string name="view_all">View All</string>
+    <string name="product_sqlite">Product</string>
+    <string name="cart">Cart</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="ten_sp">Name product</string>
+    <string name="don_gia_45000">Price: 45000</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="back">Back</string>
+    <string name="drink_name">Drink Name</string>
+    <string name="_5_per_cup">50000đ</string>
+    <string name="hot">Size M</string>
+    <string name="iced">Size L</string>
+    <string name="toppings_3">Add Fries</string>
+    <string name="add_extra_cream_2">Add Salad </string>
+    <string name="add_to_Cart">Add to cart</string>
+    <string name="change_color_white_or_black_background">Change Color WHITE or BLACK Background</string>
+    <string name="order_summary">ORDER SUMMARY</string>
+    <string name="clear_the_database">Clear The DATABASE</string>
+    <string name="favorite">favorite</string>
+    <string name="burger">Burger</string>
+    <string name="chicken">Chicken</string>
+    <string name="smoothie">Smoothie</string>
+    <string name="vanilla">Vanilla</string>
+    <string name="thai_tea">Thai Tea</string>
+    <string name="popular_food">Popular Food</string>
+    <string name="discount_on_food_items">Discount On Food Items</string>
+    <string name="cappuccino">Cappuccino</string>
+    <string name="coca_cola">Coca-cola</string>
+    <string name="bubble_tea">Bubble Tea</string>
+    <string name="dessertcheese">Dessert</string>
+    <string name="voucher">Voucher</string>
+    <string name="voucher1">Voucher1</string>
+    <string name="voucher2">Voucher2</string>
+    <string name="voucher3">Voucher3</string>
+    <string name="voucher4">Voucher4</string>
+    <string name="screen1">Fresh Food</string>
+    <string name="screen2">Fast Delivery</string>
+    <string name="screen3">Easy Payment</string>
+    <string name="screen1desc">Nguyên liệu mới mỗi ngày đã qua kiểm duyệt, được chế biến sạch sẽ, hấp dẫn với công thức riêng</string>
+    <string name="screen2desc">Giao hàng nhanh chóng, an toàn, đảm bảo thức ăn vẫn còn nóng trong quá trình vận chuyển</string>
+    <string name="screen3desc">Dễ dàng đặt món và thanh toán, hỗ trợ nhiều hình thức thanh toán và xuất hóa đơn điện tử</string>
+    <string name="startDesc">Ứng dụng đặt món ăn nhanh tiện lợi, đáp ứng nhu cầu của mọi người tiêu dùng</string>
+
+
+</resources>

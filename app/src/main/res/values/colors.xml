@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="pupple">#5968BC</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#19A1DF</color>
+    <color name="green">#2ED4EA</color>
+
+    <color name="red">#CA1A0D</color>
+    <color name="orange">#E6832C</color>
+    <color name="lightred">#E4544A</color>
+    <color name="lightorange">#FF9800</color>
+    <color name="vanila">#F6FAD0</color>
+    <color name="light">#18E4D1</color>
+    <color name="dargGreen">#35C53B</color>
+
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="grey">#424242</color>
+    <color name="lightgrey">#A39B9B</color>
+
+    <color name="notifications">#13B2C3</color>
+    <color name="private_account">#E6A326</color>
+    <color name="security">#D95F69</color>
+</resources>

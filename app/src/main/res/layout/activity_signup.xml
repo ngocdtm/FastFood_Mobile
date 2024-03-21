@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/logininterface2"
+    tools:context=".activity.SignupActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="200dp"
+        android:padding="20dp">
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/signup_fullName"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:hint="Full Name"
+            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawablePadding="8dp"
+            />
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/signup_email"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Email"
+            android:drawableLeft="@drawable/baseline_mail_24"
+            android:drawablePadding="8dp"
+            />
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/signup_birthday"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Date of birth (dd/mm/yyyy)"
+            android:focusable="false"
+            android:drawableLeft="@drawable/baseline_date_range_24"
+            android:drawablePadding="8dp"
+            />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/signup_chooseGender"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textChooseGender"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="10dp"
+                android:padding="8dp"
+                android:text=" Gender :"
+                android:textSize="20dp"
+                android:drawableLeft="@drawable/baseline_drive_file_rename_outline_24"
+                />
+
+            <RadioButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/signup_female"
+                android:text="Female"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18sp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                />
+            <RadioButton
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/signup_male"
+                android:text="Male"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18sp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                />
+
+        </RadioGroup>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/signup_phone"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Mobile phone"
+            android:drawableLeft="@drawable/baseline_phone_24"
+            android:drawablePadding="8dp"
+            />
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/signup_password"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawablePadding="8dp"
+            />
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:id="@+id/confirmpassword"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawablePadding="8dp"
+            />
+
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:text="Đăng ký"
+            android:id="@+id/signup_button"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            app:cornerRadius = "20dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/loginRedirectText"
+            android:text="Đã có tài khoản? Đăng nhập ngay!"
+            android:textColor="@color/red"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="22dp"
+            android:gravity="center"
+            android:background="@drawable/lavender_border"
+            />
+    </LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:elevation="10dp"
+        android:outlineAmbientShadowColor="@color/blue"
+        android:outlineSpotShadowColor="@color/pupple"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+
+</LinearLayout>

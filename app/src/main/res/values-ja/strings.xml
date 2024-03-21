@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="true">フードニャン</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="greentea" translatable="false">ズミー</string>
+    <string name="latte" translatable="false">よし</string>
+    <string name="orangesmoothie" translatable="false">完ぺきですね</string>
+    <string name="orangevanilla" translatable="false">美味しい</string>
+    <string name="cappcuni" translatable="false">非常にいいです</string>
+    <string name="thaitea" translatable="false">ワウ</string>
+    <string name="tea" translatable="false">いいですね</string>
+    <string name="bubbletea" translatable="false">元気</string>
+    <string name="match" translatable="false">試みる</string>
+    <string name="popular_product">人気商品</string>
+    <string name="view_all">人気商品</string>
+    <string name="product_sqlite">製品</string>
+    <string name="cart">カート</string>
+    <string name="home">家</string>
+    <string name="profile">プロフィール</string>
+    <string name="ten_sp">製品名</string>
+    <string name="don_gia_45000">単価:</string>
+    <string name="add_to_cart">お買い物カゴに追加</string>
+    <string name="back">戻る</string>
+    <string name="drink_name">ドリンク名</string>
+    <string name="_5_per_cup"> カップあたり</string>
+    <string name="hot">暑い</string>
+    <string name="iced">アイス</string>
+    <string name="toppings_3">トッピング 3</string>
+    <string name="add_extra_cream_2">クリームを追加する 2</string>
+    <string name="add_to_Cart">お買い物カゴに追加</string>
+    <string name="change_color_white_or_black_background">背景の色を白または黒に変更</string>
+    <string name="order_summary">注文概要</string>
+    <string name="clear_the_database">データベースをクリアする</string>
+    <string name="favorite">トッピング</string>
+    <string name="burger">バーガー</string>
+    <string name="chicken">鶏</string>
+    <string name="smoothie">スムージー</string>
+    <string name="vanilla">バニラ</string>
+    <string name="thai_tea">タイのお茶</string>
+    <string name="popular_food">人気の食べ物</string>
+    <string name="discount_on_food_items">食料品の割引</string>
+    <string name="cappuccino">カプチーノ</string>
+    <string name="coca_cola">コカコーラ</string>
+    <string name="bubble_tea">バブルティー</string>
+    <string name="dessertcheese">デザートチーズ</string>
+    <string name="voucher">伝票</string>
+    <string name="voucher1">伝票1</string>
+    <string name="voucher2">伝票2</string>
+    <string name="voucher3">伝票3</string>
+    <string name="voucher4">伝票4</string>
+    <string name="screen1">Fresh Food</string>
+    <string name="screen2">Fast Delivery</string>
+    <string name="screen3">Easy Payment</string>
+    <string name="screen1desc">Nguyên liệu mới mỗi ngày đã qua kiểm duyệt, được chế biến sạch sẽ, hấp dẫn với công thức riêng</string>
+    <string name="screen2desc">Giao hàng nhanh chóng, an toàn, đảm bảo thức ăn vẫn còn nóng trong quá trình vận chuyển</string>
+    <string name="screen3desc">Dễ dàng đặt món và thanh toán, hỗ trợ nhiều hình thức thanh toán và xuất hóa đơn điện tử</string>
+    <string name="startDesc">Ứng dụng đặt món ăn nhanh tiện lợi, đáp ứng nhu cầu của mọi người tiêu dùng</string>
+
+
+</resources>

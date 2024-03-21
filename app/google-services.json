@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "977801816626",
+    "firebase_url": "https://foodnhanh-883b9-default-rtdb.firebaseio.com",
+    "project_id": "foodnhanh-883b9",
+    "storage_bucket": "foodnhanh-883b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977801816626:android:05630af2e1123eb070ea2b",
+        "android_client_info": {
+          "package_name": "com.example.foodnhanh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwtaRhpl9l994UziK91fqsWaM1cEsyZeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

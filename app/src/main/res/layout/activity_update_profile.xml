@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".activity.UserProfileActivity">
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:padding="24dp"
+        android:background="@drawable/white_background">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bạn có thể cập nhật profile của mình!"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/pupple"/>
+
+        <EditText
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:id="@+id/update_fullName"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:hint="Full Name"
+            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawablePadding="8dp"
+            />
+        <EditText
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:id="@+id/update_birthday"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Date of birth (dd/mm/yyyy)"
+            android:focusable="false"
+            android:drawableLeft="@drawable/baseline_date_range_24"
+            android:drawablePadding="8dp"
+            />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/update_chooseGender"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textChooseGender"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="10dp"
+                android:padding="8dp"
+                android:text=" Gender :"
+                android:textSize="20dp"
+                android:drawableLeft="@drawable/baseline_drive_file_rename_outline_24"
+                />
+
+            <RadioButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/update_female"
+                android:text="Female"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12sp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                />
+            <RadioButton
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/update_male"
+                android:text="Male"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="30dp"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                />
+
+        </RadioGroup>
+
+        <EditText
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:id="@+id/update_phone"
+            android:background="@drawable/lavender_border"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Mobile phone"
+            android:drawableLeft="@drawable/baseline_phone_24"
+            android:drawablePadding="8dp"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="THAY ĐỔI EMAIL"
+            android:id="@+id/btn_update_email"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/pupple"
+            app:cornerRadius = "20dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="CẬP NHẬT ẢNH"
+            android:id="@+id/btn_update_picture"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/pupple"
+            app:cornerRadius = "20dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="LƯU CHỈNH SỬA"
+            android:id="@+id/btn_update_save"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/pupple"
+            app:cornerRadius = "20dp"/>
+    </LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/update_progressBar"
+        android:elevation="10dp"
+        android:outlineAmbientShadowColor="@color/blue"
+        android:outlineSpotShadowColor="@color/pupple"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+</LinearLayout>
