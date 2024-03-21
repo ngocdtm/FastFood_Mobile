@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity
 {
-    EditText loginemail, loginpassword;
+   // EditText loginemail, loginpassword;
     Button btnlogin;
     TextView signupRedirectText, forgotpass;
     ProgressBar progressBar;
