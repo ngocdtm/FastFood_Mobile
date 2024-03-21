@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,7 +78,6 @@ public class ChangePasswordActivity extends AppCompatActivity
                 userPassword = currentPassword.getText().toString();
                 if (userPassword.isEmpty())
                 {
-                    //Toast.makeText(ChangePasswordActivity.this, "Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
                     currentPassword.setError("Mật khẩu không được để trống");
                     currentPassword.requestFocus();
                 }
@@ -154,13 +152,11 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
         else if (!userpassNew.matches(userconfirmPass))
         {
-            //Toast.makeText(ChangePasswordActivity.this, "Mật khẩu không chính xác! Vui lòng nhập lại", Toast.LENGTH_SHORT).show();
             confirmNewPass.setError("Mật khẩu không chính xác! Vui lòng nhập lại");
             confirmNewPass.requestFocus();
         }
         else if (userPassword.matches(userpassNew))
         {
-            //Toast.makeText(ChangePasswordActivity.this, "Mật khẩu mới không được trùng với mật khẩu cũ. Vui lòng nhập mật khẩu khác!", Toast.LENGTH_SHORT).show();
             newPassword.setError("Mật khẩu mới không được trùng với mật khẩu cũ. Vui lòng nhập mật khẩu khác!");
             newPassword.requestFocus();
         }

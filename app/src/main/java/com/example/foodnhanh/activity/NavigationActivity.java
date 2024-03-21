@@ -4,6 +4,7 @@ package com.example.foodnhanh.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -27,6 +28,7 @@ public class NavigationActivity extends AppCompatActivity
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
+        @SuppressLint("SetTextI18n")
         @Override
         public void onPageSelected(int position) {
             setDotIndicator(position);
@@ -52,33 +54,24 @@ public class NavigationActivity extends AppCompatActivity
         backButton = findViewById(R.id.backButton);
         nextButton = findViewById(R.id.nextButton);
         skipButton = findViewById(R.id.skipButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getItem(0) > 0) {
-                    slideViewPager.setCurrentItem(getItem(-1), true);
-                }
+        backButton.setOnClickListener(v -> {
+            if (getItem(0) > 0) {
+                slideViewPager.setCurrentItem(getItem(-1), true);
             }
         });
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getItem(0) < 2)
-                    slideViewPager.setCurrentItem(getItem(1), true);
-                else {
-                    Intent i = new Intent(NavigationActivity.this, GetStartedActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-            }
-        });
-        skipButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
-                startActivity(intent);
+        nextButton.setOnClickListener(v -> {
+            if (getItem(0) < 2)
+                slideViewPager.setCurrentItem(getItem(1), true);
+            else {
+                Intent i = new Intent(NavigationActivity.this, GetStartedActivity.class);
+                startActivity(i);
                 finish();
             }
+        });
+        skipButton.setOnClickListener(v -> {
+            Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
         slideViewPager = findViewById(R.id.slideViewPager);
         dotIndicator = findViewById(R.id.dotIndicator);

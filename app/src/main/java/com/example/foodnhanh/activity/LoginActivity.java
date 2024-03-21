@@ -26,9 +26,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -38,8 +35,7 @@ public class LoginActivity extends AppCompatActivity
     ProgressBar progressBar;
     FirebaseAuth authProfile;
     static final String TAG="LoginActivity";
-    FirebaseDatabase database;
-    //DatabaseReference reference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://projectfastfood-8a851-default-rtdb.firebaseio.com/");
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

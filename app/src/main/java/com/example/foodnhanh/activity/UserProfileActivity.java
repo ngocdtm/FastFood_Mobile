@@ -1,12 +1,10 @@
 package com.example.foodnhanh.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 public class UserProfileActivity extends AppCompatActivity
 {
@@ -31,16 +28,15 @@ public class UserProfileActivity extends AppCompatActivity
     String fullName, email, birthday, gender, mobile;
     Button btnUpdateProfile, btnReturntoInfoFrag;
     ImageView imageView, imgRefresh;
+Intent intent;
     FirebaseAuth authProfile;
-    ConstraintLayout constraintLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        //getSupportActionBar().setTitle("Profile");
-        //constraintLayout = findViewById(R.id.User_layout);
+
         txtName = findViewById(R.id.profile_name);
         txtEmail = findViewById(R.id.profile_email);
         txtGender = findViewById(R.id.profile_gender);
@@ -56,68 +52,41 @@ public class UserProfileActivity extends AppCompatActivity
         }
         else
         {
-            //checkEmailVerified(firebaseUser);
+
             showUserProfile(firebaseUser);
         }
 
-        imageView = findViewById(R.id.profile_image);
-        imageView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(UserProfileActivity.this, UploadProfilePictureActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        imageView =findViewById(R.id.profile_image);
+        imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(UserProfileActivity.this, UploadProfilePictureActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         btnReturntoInfoFrag = findViewById(R.id.ReturnButton);
-        btnReturntoInfoFrag.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
+        btnReturntoInfoFrag.setOnClickListener(v -> {
 //
-                Intent intent = new Intent(UserProfileActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
+            Intent intent = new Intent(UserProfileActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         btnUpdateProfile = findViewById(R.id.btn_UpdateProfile);
-        btnUpdateProfile.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(UserProfileActivity.this, UpdateProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        btnUpdateProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(UserProfileActivity.this, UpdateProfileActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         imgRefresh = findViewById(R.id.click_refresh);
-        imgRefresh.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // Refresh
-                startActivity(getIntent());
-                finish();
-                overridePendingTransition(0,0);
-            }
+        imgRefresh.setOnClickListener(v -> {
+            // Refresh
+            startActivity(getIntent());
+            finish();
+            overridePendingTransition(0,0);
         });
 
     }
-
-    //private void checkEmailVerified(FirebaseUser firebaseUser)
-    // {
-    //     if (!firebaseUser.isEmailVerified())
-    //     {
-    //    }
-    // }
 
     private void showUserProfile(FirebaseUser firebaseUser)
     {
@@ -145,16 +114,10 @@ public class UserProfileActivity extends AppCompatActivity
                     txtBirthday.setText(birthday);
                     txtPhone.setText(mobile);
 
-                    //Set User (After user has uploaded)
+                    //Set User (After user has uploaded
                     Uri uri = firebaseUser.getPhotoUrl();
-
-                    //ImageView setImageURI() should not be used with regular URIs. So we are using Picasso
-                  //  Glide.with(imageView).load(UserProfileActivity.this).into(imageView);
-                  // Picasso.with(UserProfileActivity.this).load(uri).into(imageView);
-                  //  Glide.with(imageView).load(UserProfileActivity.this).load(uri).load(imageView);
-                    //Intent intent=new Intent(v.getContext(), DetailActivity.class);
-                //    intent.putExtra("singlename",model.getName());
-                    Glide.with(imageView).load(UserProfileActivity.this).load(uri).load(imageView);
+                    intent=getIntent();
+                    Glide.with(imageView).load(intent.getStringExtra("hinhProfile")).load(uri).into(imageView);
                 }
                 else
                 {

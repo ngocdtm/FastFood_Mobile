@@ -57,9 +57,9 @@ public class ViewPagerAdapter extends PagerAdapter
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slider_screen,container,false);
-        ImageView sliderImage = (ImageView) view.findViewById(R.id.sliderImage);
-        TextView sliderTitle = (TextView) view.findViewById(R.id.sliderTitle);
-        TextView sliderDesc = (TextView) view.findViewById(R.id.sliderDesc);
+        ImageView sliderImage = view.findViewById(R.id.sliderImage);
+        TextView sliderTitle = view.findViewById(R.id.sliderTitle);
+        TextView sliderDesc =  view.findViewById(R.id.sliderDesc);
         sliderImage.setImageResource(sliderAllImages[position]);
         sliderTitle.setText(this.sliderAllTitle[position]);
         sliderDesc.setText(this.sliderAllDesc[position]);

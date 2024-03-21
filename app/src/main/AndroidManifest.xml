@@ -28,7 +28,7 @@
             android:name=".activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.NavigationActivity"
             android:exported="false" />
         <activity
             android:name=".activity.GetStartedActivity"
@@ -75,7 +75,7 @@
             android:name=".activity.InfoActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.NavigationActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

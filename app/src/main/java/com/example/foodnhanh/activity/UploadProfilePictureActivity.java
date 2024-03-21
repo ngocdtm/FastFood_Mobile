@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.foodnhanh.R;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +27,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+
 
 
 public class UploadProfilePictureActivity extends AppCompatActivity
@@ -61,8 +60,7 @@ public class UploadProfilePictureActivity extends AppCompatActivity
         // Set User's current DP in ImageView (if upload already). We will Picasso since ImageViewer setImage
         // Regular URIs
         Glide.with(imageViewUpPic).load(UploadProfilePictureActivity.this).load(uri).load(imageViewUpPic);
-       //Picasso.get(UploadProfilePictureActivity.this).load(uri).into(imageViewUpPic);
-        //Glide.with(imageViewUpPic).load(UploadProfilePictureActivity.this).into(imageViewUpPic);
+
 
         // Chọn ảnh để upload
         btn_chooseuploadImg.setOnClickListener(new View.OnClickListener()
@@ -115,6 +113,7 @@ public class UploadProfilePictureActivity extends AppCompatActivity
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(UploadProfilePictureActivity.this,"Upload ảnh profile thành công!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(UploadProfilePictureActivity.this, UserProfileActivity.class);
+                    Glide.with(imageViewUpPic).load(intent.getStringExtra("hinhProfile")).into(imageViewUpPic);
                     startActivity(intent);
                     finish();
                 }
@@ -123,7 +122,7 @@ public class UploadProfilePictureActivity extends AppCompatActivity
                 @Override
                 public void onFailure(@NonNull Exception e)
                 {
-                    Toast.makeText(UploadProfilePictureActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(UploadProfilePictureActivity.this,"Không có hien anh omg!", Toast.LENGTH_LONG).show();
                 }
             });
         }

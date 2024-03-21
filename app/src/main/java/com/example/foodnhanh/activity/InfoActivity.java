@@ -36,6 +36,7 @@ public class InfoActivity extends AppCompatActivity implements LoaderManager.Loa
     public Uri mCurrentCartUri;
     boolean hasAllRequiredValues = false;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,25 +64,21 @@ public class InfoActivity extends AppCompatActivity implements LoaderManager.Loa
             SaveCart();
         });
 
-        plusquantity.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                // food price
-                int basePrice = 50000;
-                quantity++;
-                displayQuantity();
-                int Pricebur = basePrice * quantity;
-                String setnewPrice = String.valueOf(Pricebur);
-                foodPrice.setText(setnewPrice);
+        plusquantity.setOnClickListener(v -> {
+            // food price
+            int basePrice = 50000;
+            quantity++;
+            displayQuantity();
+            int Pricebur = basePrice * quantity;
+            String setnewPrice = String.valueOf(Pricebur);
+            foodPrice.setText(setnewPrice);
 
 
-                // checkBoxes functionality
+            // checkBoxes functionality
 
-                int ifCheckBox = CalculatePrice(addFries, addSalad);
-                foodPrice.setText(ifCheckBox+" ₫");
+            int ifCheckBox = CalculatePrice(addFries, addSalad);
+            foodPrice.setText(ifCheckBox+" ₫");
 
-            }
         });
 
         minusquantity.setOnClickListener(v -> {
@@ -109,7 +106,7 @@ public class InfoActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-    private boolean SaveCart() {
+    private void SaveCart() {
 
         // getting the values from our views
         String name = foodName.getText().toString();
@@ -146,7 +143,6 @@ public class InfoActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         hasAllRequiredValues = true;
-        return hasAllRequiredValues;
 
     }
 

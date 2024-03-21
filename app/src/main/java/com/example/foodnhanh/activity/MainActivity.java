@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -24,7 +23,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -82,7 +80,7 @@ public static final String[] language= new String[]{"Select Language", "English"
 
         //Language Spinner
         spinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> spinneradapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, language);
+        ArrayAdapter<String> spinneradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, language);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(spinneradapter);
         spinner.setSelection(0);
@@ -224,24 +222,14 @@ public static final String[] language= new String[]{"Select Language", "English"
         builder.setMessage("Vui lòng đăng nhập để xem thông tin cá nhân!");
 
         // Open Email app if User click Continue Button
-        builder.setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        builder.setPositiveButton("Đăng nhập", (dialog, which) -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
-        builder.setNegativeButton("Trở về", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                startActivity(getIntent());
-                finish();
-            }
+        builder.setNegativeButton("Trở về", (dialog, which) -> {
+            startActivity(getIntent());
+            finish();
         });
 
         // Create the AlertDialog
@@ -259,6 +247,7 @@ public static final String[] language= new String[]{"Select Language", "English"
         getMenuInflater().inflate(R.menu.nav_menu, menu);
         menuItem=menu.findItem(R.id.action_search);
         searchView=(SearchView) menuItem.getActionView();
+        assert searchView != null;
         searchView.setIconified(true);
         SearchManager searchManager=(SearchManager) this.getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(this.getComponentName()));

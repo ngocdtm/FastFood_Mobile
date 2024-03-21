@@ -24,14 +24,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -192,19 +190,16 @@ public class UpdateProfileActivity extends AppCompatActivity
         }
         else if (txtPhone.length() != 10)
         {
-            //Toast.makeText(UpdateProfileActivity.this, "Số điện thoại phải đủ 10 số. Vui lòng nhập lại!", Toast.LENGTH_LONG).show();
             UpdatePhone.setError("Số điện thoại phải đủ 10 số. Vui lòng nhập lại!");
             UpdatePhone.requestFocus();
         }
         else if (!mobileMatcher.find())
         {
-            //Toast.makeText(UpdateProfileActivity.this, "Số điện thoại không hợp lệ. Vui lòng nhập lại! ", Toast.LENGTH_LONG).show();
             UpdatePhone.setError("Số điện thoại không hợp lệ. Vui lòng nhập lại!");
             UpdatePhone.requestFocus();
         }
         else if (radioGroupGender.getCheckedRadioButtonId() == -1)
         {
-            //Toast.makeText(UpdateProfileActivity.this, "Vui lòng chọn giới tính!", Toast.LENGTH_LONG).show();
             radioButton.setError("Vui lòng chọn giới tính!");
             radioButton.requestFocus();
         }

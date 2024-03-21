@@ -33,9 +33,9 @@ public class ProfileActivity extends AppCompatActivity {
     TextView txtName;
     Button btnViewProfile, btnLogout, btnchangePass;
     String fullName;
-    ImageView imageView;
+
     FirebaseAuth authProfile;
-    Context context;
+
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -44,10 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         txtName =findViewById(R.id.setting_name);
-        //imageView = view.findViewById(R.id.Info_Image);
         btnViewProfile =findViewById(R.id.viewProfile);
         btnLogout = findViewById(R.id.btnLogout);
-        //btnRefresh = view.findViewById(R.id.btn_refresh);
 
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
@@ -85,20 +83,6 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        if(authProfile==null)
-//        {
-//            Toast.makeText(ProfileActivity.this, "Something went wrong! User's detail are not available at the moment.", Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-//            startActivity(intent);
-//        }
-//        else
-//        {
-//            //checkEmailVerified(firebaseUser);
-//            showUserProfile(firebaseUser);
-//        }
-
-
 
     }
     private void showUserProfile(FirebaseUser firebaseUser)
