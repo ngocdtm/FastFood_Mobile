@@ -99,6 +99,7 @@ Intent intent;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
+
                 ReadWriteUserDetails readWriteUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
                 if (readWriteUserDetails != null)
                 {

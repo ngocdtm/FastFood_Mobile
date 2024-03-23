@@ -22,6 +22,9 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
+/** @noinspection deprecation*/
 public class UpdateEmailActivity extends AppCompatActivity
 {
     FirebaseAuth authProfile;
@@ -30,30 +33,41 @@ public class UpdateEmailActivity extends AppCompatActivity
     TextView txtViewAuthenticated;
     Button btn_authenticated, btn_savenewEmail;
     EditText currentEmail, newEmail, curentPassword;
-    String userOldEmail, userNewEmail, userPassword;
+    String userOldEmail, userPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_email);
-
+        //currentEmail : tên đang nhập vào
         currentEmail = findViewById(R.id.input_currentEmail);
+        //curentPass: pass đang nhập vào
         curentPassword = findViewById(R.id.input_password);
+        //đổi mới gán vào
         newEmail = findViewById(R.id.input_newEmail);
         txtViewAuthenticated = findViewById(R.id.txt_update_email_authentication);
 
         btn_authenticated = findViewById(R.id.btn_verify);
+        //btnEmail: save lại
         btn_savenewEmail = findViewById(R.id.btn_saveEmail);
-
+btn_savenewEmail.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
+        intent.putExtra("BackToProfile", 1);
+        startActivity(intent);
+        finish();
+    }
+});
         progressBar = findViewById(R.id.updateEmail_progessBar);
-
+        // đang mới đầu là chưa lưu sau đó sẽ thành true
         btn_savenewEmail.setEnabled(false);
         newEmail.setEnabled(false);
 
         authProfile = FirebaseAuth.getInstance();
-        firebaseUser = authProfile.getCurrentUser();
+        firebaseUser = authProfile.getCurrentUser();//lấy ng dùng
 
-        userOldEmail = firebaseUser.getEmail();
+        userOldEmail = firebaseUser.getEmail();//người dùng cũ
 
         if (firebaseUser.equals(""))
         {
@@ -67,130 +81,126 @@ public class UpdateEmailActivity extends AppCompatActivity
 
     private void reAuthenticate(FirebaseUser firebaseUser)
     {
-        btn_authenticated.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+        btn_authenticated.setOnClickListener(v -> {
+         userOldEmail = currentEmail.getText().toString();
+            userPassword = curentPassword.getText().toString();
+
+            if (userOldEmail.isEmpty())
             {
-                userOldEmail = currentEmail.getText().toString();
-                userPassword = curentPassword.getText().toString();
+                currentEmail.setError("Email không được để trống!");//checked
+                currentEmail.requestFocus();
+            }
+            else if (userPassword.isEmpty())
+            {
+                curentPassword.setError("Mật khẩu không được để trống!");//checked
+                curentPassword.requestFocus();
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(userOldEmail).matches())//checked
+            {
+                currentEmail.setError("Email không chính xác!");
+                currentEmail.requestFocus();
+            }
+            else
+            {
+                progressBar.setVisibility(View.VISIBLE);
+                AuthCredential credential = EmailAuthProvider.getCredential(userOldEmail, userPassword);//checked password wrong
 
-                if (userOldEmail.isEmpty())
-                {
-                    currentEmail.setError("Email không được để trống!");
-                    currentEmail.requestFocus();
-                }
-                else if (userPassword.isEmpty())
-                {
-                    curentPassword.setError("Mật khẩu không được để trống!");
-                    curentPassword.requestFocus();
-                }
-                else if (!Patterns.EMAIL_ADDRESS.matcher(userOldEmail).matches())
-                {
-                    currentEmail.setError("Email không chính xác!");
-                    currentEmail.requestFocus();
-                }
-                else
-                {
-                    progressBar.setVisibility(View.VISIBLE);
-                    AuthCredential credential = EmailAuthProvider.getCredential(userOldEmail, userPassword);
-
-                    firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>()
+                firebaseUser.reauthenticate(credential).addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
                     {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task)
+                        progressBar.setVisibility(View.GONE);
+
+                        curentPassword.setEnabled(false);//đóng text ko cho nhap
+                        btn_authenticated.setEnabled(false);//đóng text ko cho nhap
+                        newEmail.setEnabled(true);//open
+                        btn_savenewEmail.setEnabled(true);//open
+
+                        Toast.makeText(UpdateEmailActivity.this, "Mật khẩu đã được xác thực. Bạn có thể thay đổi Email mới!", Toast.LENGTH_SHORT).show();
+
+                        txtViewAuthenticated.setText("Bạn đã xác thực thành công. Hãy cập nhật email mới");
+
+
+                        // Đổi màu button thay đổi emai
+                        btn_savenewEmail.setBackgroundTintList(ContextCompat.getColorStateList(UpdateEmailActivity.this, R.color.dargGreen));
+
+                        btn_savenewEmail.setOnClickListener(new View.OnClickListener()
                         {
-                            if (task.isSuccessful())
+                            @Override
+                            public void onClick(View v1)
                             {
-                                progressBar.setVisibility(View.GONE);
 
-                                Toast.makeText(UpdateEmailActivity.this, "Mật khẩu đã được xác thực. Bạn có thể thay đổi Email mới!", Toast.LENGTH_SHORT).show();
-
-                                txtViewAuthenticated.setText("Bạn đã xác thực thành công. Hãy cập nhật email mới");
-
-                                newEmail.setEnabled(true);
-                                curentPassword.setEnabled(false);
-                                btn_authenticated.setEnabled(false);
-                                btn_savenewEmail.setEnabled(true);
-
-                                // Đổi màu button thay đổi emai
-                                btn_savenewEmail.setBackgroundTintList(ContextCompat.getColorStateList(UpdateEmailActivity.this, R.color.dargGreen));
-
-                                btn_savenewEmail.setOnClickListener(new View.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View v)
-                                    {
-                                        userNewEmail = newEmail.getText().toString();
-                                        if (userNewEmail.isEmpty())
-                                        {
-                                            Toast.makeText(UpdateEmailActivity.this, "Email mới không được để trống", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else if (!Patterns.EMAIL_ADDRESS.matcher(userNewEmail).matches())
-                                        {
-                                            Toast.makeText(UpdateEmailActivity.this, "Vui lòng điền Email đã tồn tại", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else if (userOldEmail.matches(userNewEmail))
-                                        {
-                                            Toast.makeText(UpdateEmailActivity.this, "Email mới không được trùng với email cũ. Vui lòng nhập email khác!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else
-                                        {
-                                            progressBar.setVisibility(View.VISIBLE);
-                                            updateEmail(firebaseUser);
-                                        }
-                                    }
-                                });
+                             String  NewEmail=newEmail.getText().toString();
+                              updateEmail(NewEmail);
                             }
-                            else
-                            {
-                                try
-                                {
-                                    throw task.getException();
-                                }
-                                catch (Exception e)
-                                {
-                                    Toast.makeText(UpdateEmailActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
+                        });
+                    }
+                    else
+                    {
+                        try
+                        {
+                            throw task.getException();
                         }
-                    });
-                }
+                        catch (Exception e)
+                        {
+                            Toast.makeText(UpdateEmailActivity.this," Ko coa thay doi ne huhu", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    progressBar.setVisibility(View.VISIBLE);
+                });
             }
         });
     }
 
-    private void updateEmail(FirebaseUser firebaseUser)
+    private void updateEmail(String NewEmail)
     {
-        firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>()
+        String userNewEmail = newEmail.getText().toString();
+        if (userNewEmail.isEmpty())
         {
-            @Override
-            public void onComplete(@NonNull Task<Void> task)
+            Toast.makeText(UpdateEmailActivity.this, "Email mới không được để trống", Toast.LENGTH_SHORT).show();
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(userNewEmail).matches())
+        {
+            Toast.makeText(UpdateEmailActivity.this, " Email ko tồn tại", Toast.LENGTH_SHORT).show();
+        }
+        else if (userOldEmail.matches(userNewEmail))
+        {
+            Toast.makeText(UpdateEmailActivity.this, "Email mới không được trùng với email cũ. Vui lòng nhập email khác!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>()
             {
-                if (task.isComplete())
+                @Override
+                public void onComplete(@NonNull Task<Void> task)
                 {
-                    // Verify Email
-                    firebaseUser.sendEmailVerification();
+                    if (task.isComplete())
+                    {
+                        // Verify Email
+                       // firebaseUser.sendEmailVerification();
 
-                    Toast.makeText(UpdateEmailActivity.this, "Email mới đã được cập nhật. Vui lòng xác thực email!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
-                    startActivity(intent);
-                    finish();;
-                }
-                else
-                {
-                    try
-                    {
-                        throw task.getException();
+                        Toast.makeText(UpdateEmailActivity.this, "Email mới đã được cập nhật. Vui lòng xác thực email!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
+                        intent.putExtra("BackToProfile", 1);
+                        startActivity(intent);
+                        finish();;
                     }
-                    catch (Exception e)
+
+
+                    else
                     {
-                        curentPassword.setError("Mật khẩu không chính xác!");
-                        curentPassword.requestFocus();
+                        try
+                        {
+                            throw Objects.requireNonNull(task.getException());
+                        }
+                        catch (Exception e)
+                        {
+                            curentPassword.setError("Email ko chinh xac!");
+                            curentPassword.requestFocus();
+                        }
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+            });
+        }
+
     }
 }

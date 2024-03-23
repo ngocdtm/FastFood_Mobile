@@ -1,10 +1,9 @@
 package com.example.foodnhanh.activity;
 
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,12 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodnhanh.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 public class ChangePasswordActivity extends AppCompatActivity
 {
@@ -55,6 +54,7 @@ public class ChangePasswordActivity extends AppCompatActivity
         authProfile = FirebaseAuth.getInstance();
         firebaseUser = authProfile.getCurrentUser();
 
+        assert firebaseUser != null;
         if (firebaseUser.equals(""))
         {
             Toast.makeText(ChangePasswordActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -68,75 +68,58 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void reAuthenticateUser(FirebaseUser firebaseUser)
     {
-        btn_authenticated.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+        btn_authenticated.setOnClickListener(v -> {
+            userPassword = currentPassword.getText().toString();
+            if (userPassword.isEmpty())
             {
-                userPassword = currentPassword.getText().toString();
-                if (userPassword.isEmpty())
-                {
-                    currentPassword.setError("Mật khẩu không được để trống");
-                    currentPassword.requestFocus();
-                }
-                else
-                {
-                    progressBar.setVisibility(View.VISIBLE);
+                currentPassword.setError("Mật khẩu không được để trống");
+                currentPassword.requestFocus();
+            }
+            else
+            {
+                progressBar.setVisibility(View.VISIBLE);
 
-                    AuthCredential credential = EmailAuthProvider.getCredential(firebaseUser.getEmail(), userPassword);
+                AuthCredential credential = EmailAuthProvider.getCredential(Objects.requireNonNull(firebaseUser.getEmail()), userPassword);
 
-                    firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>()
+                firebaseUser.reauthenticate(credential).addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
                     {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task)
+                        progressBar.setVisibility(View.GONE);
+
+                        currentPassword.setEnabled(false);
+                        newPassword.setEnabled(true);
+                        confirmNewPass.setEnabled(true);
+
+                        btn_authenticated.setEnabled(false);
+                        btn_savenewPassword.setEnabled(true);
+
+                        Toast.makeText(ChangePasswordActivity.this, "Mật khẩu hiện tại đã được xác thực. Bạn có thể thay đổi mật khẩu mới!", Toast.LENGTH_SHORT).show();
+
+                        txtViewAuthenticated.setText("Bạn đã xác thực thành công. Hãy cập nhật mật khẩu mới");
+
+
+                        // Đổi màu button thay đổi mật khẩu
+                        btn_savenewPassword.setBackgroundTintList(ContextCompat.getColorStateList(ChangePasswordActivity.this, R.color.dargGreen));
+
+                        btn_savenewPassword.setOnClickListener(v1 -> changePass(firebaseUser));
+                    }
+                    else
+                    {
+                        try
                         {
-                            if (task.isSuccessful())
-                            {
-                                progressBar.setVisibility(View.GONE);
-
-                                currentPassword.setEnabled(false);
-                                newPassword.setEnabled(true);
-                                confirmNewPass.setEnabled(true);
-
-                                btn_authenticated.setEnabled(false);
-                                btn_savenewPassword.setEnabled(true);
-
-                                Toast.makeText(ChangePasswordActivity.this, "Mật khẩu hiện tại đã được xác thực. Bạn có thể thay đổi mật khẩu mới!", Toast.LENGTH_SHORT).show();
-
-                                txtViewAuthenticated.setText("Bạn đã xác thực thành công. Hãy cập nhật mật khẩu mới");
-
-
-                                // Đổi màu button thay đổi mật khẩu
-                                btn_savenewPassword.setBackgroundTintList(ContextCompat.getColorStateList(ChangePasswordActivity.this, R.color.dargGreen));
-
-                                btn_savenewPassword.setOnClickListener(new View.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View v)
-                                    {
-                                        changePass(firebaseUser);
-                                    }
-                                });
-                            }
-                            else
-                            {
-                                try
-                                {
-                                    throw task.getException();
-                                }
-                                catch (Exception e)
-                                {
-                                    //Toast.makeText(ChangePasswordActivity.this, "Mật khẩu không chính xác!", Toast.LENGTH_LONG).show();
-                                    currentPassword.setError("Mật khẩu không trùng khớp. Vui lòng thử lại!");
-                                    currentPassword.requestFocus();
-                                }
-                            }
-                            progressBar.setVisibility(View.GONE);
+                            throw Objects.requireNonNull(task.getException());
                         }
-                    });
-                }
+                        catch (Exception e)
+                        {
+                            currentPassword.setError("Mật khẩu không trùng khớp. Vui lòng thử lại!");
+                            currentPassword.requestFocus();
+                        }
+                    }
+                    progressBar.setVisibility(View.GONE);
+                });
             }
         });
     }
@@ -164,31 +147,26 @@ public class ChangePasswordActivity extends AppCompatActivity
         {
             progressBar.setVisibility(View.VISIBLE);
 
-            firebaseUser.updatePassword(userpassNew).addOnCompleteListener(new OnCompleteListener<Void>()
-            {
-                @Override
-                public void onComplete(@NonNull Task<Void> task)
+            firebaseUser.updatePassword(userpassNew).addOnCompleteListener(task -> {
+                if (task.isSuccessful())
                 {
-                    if (task.isSuccessful())
-                    {
-                        Toast.makeText(ChangePasswordActivity.this,"Mật khẩu đã đươc thay đổi thành công!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(ChangePasswordActivity.this, UserProfileActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else
-                    {
-                        try
-                        {
-                            throw task.getException();
-                        }
-                        catch (Exception e)
-                        {
-                            Toast.makeText(ChangePasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(ChangePasswordActivity.this,"Mật khẩu đã đươc thay đổi thành công!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ChangePasswordActivity.this, UserProfileActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
+                else
+                {
+                    try
+                    {
+                        throw Objects.requireNonNull(task.getException());
+                    }
+                    catch (Exception e)
+                    {
+                        Toast.makeText(ChangePasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+                progressBar.setVisibility(View.GONE);
             });
         }
     }

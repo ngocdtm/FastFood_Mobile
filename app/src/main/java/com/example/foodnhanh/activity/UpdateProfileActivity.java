@@ -78,6 +78,7 @@ public class UpdateProfileActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(UpdateProfileActivity.this, UploadProfilePictureActivity.class);
                 startActivity(intent);
+
                 finish();
             }
         });
@@ -130,6 +131,7 @@ public class UpdateProfileActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 updateProfile(firebaseUser);
+
             }
         });
     }
