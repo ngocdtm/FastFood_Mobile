@@ -104,19 +104,25 @@ Intent intent;
                 if (readWriteUserDetails != null)
                 {
                     fullName = readWriteUserDetails.fullName;
+
                     email = firebaseUser.getEmail();
+                    txtEmail.setText(email);
+
+
+
                     birthday = readWriteUserDetails.birthday;
                     gender = readWriteUserDetails.gender;
                     mobile = readWriteUserDetails.mobile;
 
                     txtName.setText(fullName);
-                    txtEmail.setText(email);
                     txtGender.setText(gender);
                     txtBirthday.setText(birthday);
                     txtPhone.setText(mobile);
 
                     //Set User (After user has uploaded
+
                     Uri uri = firebaseUser.getPhotoUrl();
+
                     intent=getIntent();
                     Glide.with(imageView).load(intent.getStringExtra("hinhProfile")).load(uri).into(imageView);
                 }

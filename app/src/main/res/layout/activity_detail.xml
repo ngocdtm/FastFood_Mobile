@@ -15,6 +15,16 @@
         android:layout_marginLeft="95dp"
         android:scaleType="center"
         android:src="@drawable/ic_launcher_background" />
+    <TextView
+        android:id="@+id/idCT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="280sp"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
             android:id="@+id/TenspCT"
@@ -27,7 +37,6 @@
             android:layout_marginTop="320sp"
             app:layout_constraintStart_toStartOf="parent" />
 
-
     <TextView
         android:id="@+id/Price_detail"
         android:layout_width="wrap_content"
@@ -37,46 +46,25 @@
         android:layout_marginLeft="130dp"
         android:textSize="25sp"
        />
-    <RelativeLayout
-        android:id="@+id/relative"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="720sp"
-        >
 
-        <ImageView
-            android:layout_width="39dp"
-            android:layout_height="90dp"
-            android:id="@+id/addpro"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/baseline_add_circle_24" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_marginLeft="70dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:id="@+id/quantity"
-            android:textSize="40dp"
-            android:text="1"
-            />
-        <ImageView
-            android:id="@+id/removepro"
-            android:layout_width="39dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="120dp"
-            android:src="@drawable/baseline_remove_circle_24" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:text="@string/add_to_cart"
-            android:textColor="@color/blue"
-            android:layout_marginLeft="250dp"
-            android:id="@+id/btnCart"
-            />
+    <ImageView
+        android:id="@+id/OverlayIconFavorite"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="610sp"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/layout_save"/>
+    <ImageView
+        android:id="@+id/IconFavorite"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="620sp"
+        android:src="@drawable/baseline_favorite_border_24"
+        />
 
-    </RelativeLayout>
-<Button
+    <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/back"

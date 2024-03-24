@@ -1,49 +1,63 @@
 package com.example.foodnhanh.activity;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.foodnhanh.R;
-import com.example.foodnhanh.adapter.FavAdapter;
-import com.example.foodnhanh.database.FavDB;
-import com.example.foodnhanh.model.FavItem;
+import com.example.foodnhanh.adapter.FavoriteAdapter;
+import com.example.foodnhanh.databinding.ActivityFavoriteBinding;
+import com.example.foodnhanh.model.MainModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FavoriteActivity extends AppCompatActivity {
     BottomNavigationView nav;
+
+    ActivityFavoriteBinding binding;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
+    FavoriteAdapter adapter;
     private RecyclerView recyclerView;
-    private FavDB favDB;
-    private List<FavItem> favItemList = new ArrayList<>();
-    private FavAdapter favAdapter;
+
+    public interface OnDataLoadedListener {
+        void onDataLoaded(List<MainModel> foodfastList);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
+       setContentView(R.layout.activity_favorite);
+        binding = ActivityFavoriteBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        favDB = new FavDB(this);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        loadMangas(new OnDataLoadedListener() {
+            @Override
+            public void onDataLoaded(List<MainModel> foodfastList) {
+                setRecyclerView(foodfastList);
+            }
+        });
 
-        // add item touch helper
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView); // set swipe to recyclerview
 
-        loadData();
+
 
 
 
@@ -84,47 +98,59 @@ public class FavoriteActivity extends AppCompatActivity {
             return true;
         });
     }
-
-    private void loadData() {
-        if (favItemList != null) {
-            favItemList.clear();
-        }
-    SQLiteDatabase db = favDB.getReadableDatabase();
-        Cursor cursor = favDB.select_all_favorite_list();
-        try {
-            while (cursor.moveToNext()) {
-                @SuppressLint("Range") String title= cursor.getString(cursor.getColumnIndex(FavDB.ITEM_TITLE));
-                @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(FavDB.KEY_ID));
-                @SuppressLint("Range") int image = Integer.parseInt(cursor.getString(cursor.getColumnIndex(FavDB.ITEM_IMAGE)));
-                FavItem favItem = new FavItem(title, id, image);
-                favItemList.add(favItem);
-            }
-        } finally {
-            if (cursor != null && cursor.isClosed())
-                cursor.close();
-            db.close();
-        }
-
-        favAdapter = new FavAdapter(this, favItemList);
-
-        recyclerView.setAdapter(favAdapter);
+    private void setRecyclerView(List<MainModel> foodList){
+        adapter = new FavoriteAdapter(this);
+        adapter.setData(foodList);
+        binding.favoFmRcv.setLayoutManager(new GridLayoutManager(this, 1));
+        binding.favoFmRcv.setAdapter(adapter);
 
     }
-    private ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
+    private void loadMangas(OnDataLoadedListener listener) {
+        String uid = currentUser.getUid();
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("Users")
+                .child(uid).child("Favorites");
+        favoritesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> foodIds = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String foodId = dataSnapshot.child("id").getValue(String.class);
+                    foodIds.add(foodId);
+                }
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            final int position = viewHolder.getAdapterPosition(); // get position which is swipe
-            final FavItem favItem = favItemList.get(position);
-            if (direction == ItemTouchHelper.LEFT) { //if swipe left
-                favAdapter.notifyItemRemoved(position); // item removed from recyclerview
-                favItemList.remove(position); //then remove item
-                favDB.remove_fav(favItem.getKey_id()); // remove item from database
+                // Tạo một danh sách tạm thời để lưu trữ dữ liệu manga
+                List<MainModel> foodList = new ArrayList<>();
+                DatabaseReference foodRef = FirebaseDatabase.getInstance().getReference("Product");
+                for (String foodId : foodIds) {
+                    foodRef.orderByChild("id").equalTo(foodId)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for (DataSnapshot foodSnapshot : snapshot.getChildren()) {
+                                        MainModel food= foodSnapshot.getValue(MainModel.class);
+                                        foodList.add(food);
+                                    }
+
+                                    // Kiểm tra xem đã tải tất cả dữ liệu chưa
+                                    if (foodList.size() == foodIds.size()) {
+                                        listener.onDataLoaded(foodList);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(FavoriteActivity.this, R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(FavoriteActivity.this, R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
+            }
+        });
         }
-    };
-}
+    }
+
+
+

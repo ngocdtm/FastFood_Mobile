@@ -54,6 +54,12 @@
     <string name="screen2desc">Giao hàng nhanh chóng, an toàn, đảm bảo thức ăn vẫn còn nóng trong quá trình vận chuyển</string>
     <string name="screen3desc">Dễ dàng đặt món và thanh toán, hỗ trợ nhiều hình thức thanh toán và xuất hóa đơn điện tử</string>
     <string name="startDesc">Ứng dụng đặt món ăn nhanh tiện lợi, đáp ứng nhu cầu của mọi người tiêu dùng</string>
+    <string name="isNotLogin">You are not logged in</string>
+    <string name="removeFavoriteSuccess">Favorite removed successfully</string>
+    <string name="removeFavoriteFail">Failed to remove favorite</string>
+    <string name="loadingInterupted">Loading interrupted. Please try again later.</string>
+    <string name="addFavoriteSuccess">Favorite added successfully</string>
+    <string name="dataOccurred">An error occurred while processing data</string>
 
 
 </resources>

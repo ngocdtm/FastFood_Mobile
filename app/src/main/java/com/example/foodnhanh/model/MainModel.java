@@ -5,6 +5,15 @@ import java.io.Serializable;
 public class MainModel implements Serializable {
     String name,img_url;
            int price;
+String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -30,10 +39,10 @@ public class MainModel implements Serializable {
         this.img_url = img_url;
     }
 
-    public MainModel(String name, int price, String img_url) {
+    public MainModel(String name, String img_url, int price) {
         this.name = name;
-        this.price = price;
         this.img_url = img_url;
+        this.price = price;
     }
 
     public MainModel() {

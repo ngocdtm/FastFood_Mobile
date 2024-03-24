@@ -234,13 +234,13 @@ public class SignupActivity extends AppCompatActivity {
                             }
                             catch (FirebaseAuthInvalidCredentialsException e)
                             {
-                                signupPassword.setError("Email không tồn tại hoặc đã được sử dụng. Vui lòng đăng ký email mới!");
-                                signupPassword.requestFocus();
+                                signupEmail.setError("Email không tồn tại hoặc đã được sử dụng. Vui lòng đăng ký email mới!");
+                                signupEmail.requestFocus();
                             }
                             catch (FirebaseAuthUserCollisionException e)
                             {
-                                signupPassword.setError("Người dùng đã tồn tại. Vui lòng đăng ký tài khoản mới!");
-                                signupPassword.requestFocus();
+                                signupEmail.setError("Người dùng đã tồn tại. Vui lòng đăng ký tài khoản mới!");
+                                signupEmail.requestFocus();
                             }
                             catch (Exception e)
                             {

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.foodnhanh"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -22,6 +22,9 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    buildFeatures{
+        viewBinding = true;
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

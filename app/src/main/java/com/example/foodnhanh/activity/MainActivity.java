@@ -21,16 +21,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.foodnhanh.adapter.FavFoodAdapter;
 import com.example.foodnhanh.adapter.MainAdapter;
 import com.example.foodnhanh.adapter.OrderAdapter;
 import com.example.foodnhanh.R;
-import com.example.foodnhanh.model.FoodFavoriteModel;
 import com.example.foodnhanh.model.MainModel;
 import com.example.foodnhanh.model.Model;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -44,7 +43,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final ArrayList<FoodFavoriteModel> foodItems = new ArrayList<>();
+
     List<Model> modelList;
     FirebaseAuth authProfile;
 
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     //Line 1
     MainAdapter mainAdapter;
     RecyclerView recyclerView;
-
+    Button btnAdd;
 
     MenuItem menuItem;
 Spinner spinner;
@@ -77,6 +76,15 @@ public static final String[] language= new String[]{"Select Language", "English"
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.rv);
+
+        //AddPro
+        btnAdd=findViewById(R.id.AddPro);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),AddProActivity.class));
+            }
+        });
 
         //Language Spinner
         spinner = findViewById(R.id.spinner);
@@ -129,11 +137,20 @@ public static final String[] language= new String[]{"Select Language", "English"
 
             }
            else if (id == R.id.favorite) {
-                Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
-                startActivity(intent);
-                finish();
+                 if (authProfile.getCurrentUser() == null) {
+                     Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập! Không có Product Favorite để hiển thị.", Toast.LENGTH_LONG).show();
+                     showAlertDialog();
 
-                return true;
+
+                 } else {
+
+
+                 Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
+                 startActivity(intent);
+                 finish();
+
+                 return true;
+             }
 
             }
            else if (id == R.id.cart) {
@@ -169,7 +186,7 @@ public static final String[] language= new String[]{"Select Language", "English"
         //List food FIREBASE
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         FirebaseRecyclerOptions<MainModel> options=new FirebaseRecyclerOptions.Builder<MainModel>().setQuery(FirebaseDatabase.getInstance().getReference().
-                child("Category"),MainModel.class).build();
+                child("Product"),MainModel.class).build();
         mainAdapter=new MainAdapter(options);
         recyclerView.setAdapter(mainAdapter);
 
@@ -194,20 +211,7 @@ public static final String[] language= new String[]{"Select Language", "English"
 
 
         // Favorite List
-        RecyclerView recyclerView = findViewById(R.id.reFav);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new FavFoodAdapter(foodItems, this));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
-        foodItems.add(new FoodFavoriteModel(R.drawable.burger, getString(R.string.burger),"0","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.cocacola, getString(R.string.coca_cola),"1","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.chicken, getString(R.string.chicken),"2","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.voucher, getString(R.string.voucher),"3","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.voucher1, getString(R.string.voucher1),"4","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.voucher2, getString(R.string.voucher2),"5","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.voucher3, getString(R.string.voucher3),"6","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.voucher4, getString(R.string.voucher4),"7","0"));
-        foodItems.add(new FoodFavoriteModel(R.drawable.dessert, getString(R.string.dessertcheese),"8","0"));
 
         //Search
         toolbar=findViewById(R.id.toolbar);
@@ -218,8 +222,8 @@ public static final String[] language= new String[]{"Select Language", "English"
     {
         //Setup the Alert Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Bạn chưa đăng nhập! Không có Profile để hiển thị.");
-        builder.setMessage("Vui lòng đăng nhập để xem thông tin cá nhân!");
+        builder.setTitle("Bạn chưa đăng nhập! Không có thông tin để hiển thị.");
+        builder.setMessage("Vui lòng đăng nhập để xem thông tin!");
 
         // Open Email app if User click Continue Button
         builder.setPositiveButton("Đăng nhập", (dialog, which) -> {
@@ -228,7 +232,8 @@ public static final String[] language= new String[]{"Select Language", "English"
             finish();
         });
         builder.setNegativeButton("Trở về", (dialog, which) -> {
-            startActivity(getIntent());
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         });
 
@@ -268,7 +273,7 @@ return true;
 
     private void mysearch(String query) {
         FirebaseRecyclerOptions<MainModel> options=new FirebaseRecyclerOptions.Builder<MainModel>().setQuery(FirebaseDatabase.getInstance().getReference().
-                child("Category").orderByChild("name").startAt(query).endAt(query+"\uf8ff"),MainModel.class).build();
+                child("Product").orderByChild("name").startAt(query).endAt(query+"\uf8ff"),MainModel.class).build();
         mainAdapter=new MainAdapter(options);
         mainAdapter.startListening();
         recyclerView.setAdapter(mainAdapter);
