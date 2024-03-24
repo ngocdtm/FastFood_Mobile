@@ -3,8 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="30dp"
-    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +43,23 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="Edit"
+                android:layout_marginLeft="8dp"
+                android:background="@color/blue"/>
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="Delete"
+                android:background="@color/red"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 

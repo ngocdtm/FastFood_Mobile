@@ -91,6 +91,7 @@ public class UpdateProfileActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(UpdateProfileActivity.this, UpdateEmailActivity.class);
+
                 startActivity(intent);
                 finish();
             }

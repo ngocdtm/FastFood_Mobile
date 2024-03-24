@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.denzcoskun.imageslider.ImageSlider;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     //Line 1
     MainAdapter mainAdapter;
     RecyclerView recyclerView;
-
+    Button btnAdd;
 
     MenuItem menuItem;
 Spinner spinner;
@@ -77,6 +78,15 @@ public static final String[] language= new String[]{"Select Language", "English"
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.rv);
+
+        //AddPro
+        btnAdd=findViewById(R.id.AddPro);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),AddProActivity.class));
+            }
+        });
 
         //Language Spinner
         spinner = findViewById(R.id.spinner);
@@ -199,13 +209,14 @@ public static final String[] language= new String[]{"Select Language", "English"
         recyclerView.setAdapter(new FavFoodAdapter(foodItems, this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
-        foodItems.add(new FoodFavoriteModel(R.drawable.burger, getString(R.string.burger),"0","0"));
+
         foodItems.add(new FoodFavoriteModel(R.drawable.cocacola, getString(R.string.coca_cola),"1","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.chicken, getString(R.string.chicken),"2","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.voucher, getString(R.string.voucher),"3","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.voucher1, getString(R.string.voucher1),"4","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.voucher2, getString(R.string.voucher2),"5","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.voucher3, getString(R.string.voucher3),"6","0"));
+        foodItems.add(new FoodFavoriteModel(R.drawable.burger, getString(R.string.burger),"0","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.voucher4, getString(R.string.voucher4),"7","0"));
         foodItems.add(new FoodFavoriteModel(R.drawable.dessert, getString(R.string.dessertcheese),"8","0"));
 
@@ -228,7 +239,8 @@ public static final String[] language= new String[]{"Select Language", "English"
             finish();
         });
         builder.setNegativeButton("Trở về", (dialog, which) -> {
-            startActivity(getIntent());
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         });
 

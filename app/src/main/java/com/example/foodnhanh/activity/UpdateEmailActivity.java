@@ -50,15 +50,12 @@ public class UpdateEmailActivity extends AppCompatActivity
         btn_authenticated = findViewById(R.id.btn_verify);
         //btnEmail: save lại
         btn_savenewEmail = findViewById(R.id.btn_saveEmail);
-btn_savenewEmail.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
-        intent.putExtra("BackToProfile", 1);
-        startActivity(intent);
-        finish();
-    }
-});
+  btn_savenewEmail.setOnClickListener(v -> {
+      Intent intent=new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
+      intent.putExtra("BackToProfile",0);
+      startActivity(intent);
+      finish();
+  });
         progressBar = findViewById(R.id.updateEmail_progessBar);
         // đang mới đầu là chưa lưu sau đó sẽ thành true
         btn_savenewEmail.setEnabled(false);
@@ -129,8 +126,10 @@ btn_savenewEmail.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v1)
                             {
 
-                             String  NewEmail=newEmail.getText().toString();
-                              updateEmail(NewEmail);
+                             //String  NewEmail=newEmail.getText().toString();
+                              updateEmail(firebaseUser);
+                               // newEmail.setText(intent.getStringExtra("email"));
+
                             }
                         });
                     }
@@ -151,7 +150,7 @@ btn_savenewEmail.setOnClickListener(new View.OnClickListener() {
         });
     }
 
-    private void updateEmail(String NewEmail)
+    private void updateEmail(FirebaseUser firebaseUser)
     {
         String userNewEmail = newEmail.getText().toString();
         if (userNewEmail.isEmpty())
@@ -167,38 +166,33 @@ btn_savenewEmail.setOnClickListener(new View.OnClickListener() {
             Toast.makeText(UpdateEmailActivity.this, "Email mới không được trùng với email cũ. Vui lòng nhập email khác!", Toast.LENGTH_SHORT).show();
         }
         else{
-            firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>()
-            {
-                @Override
-                public void onComplete(@NonNull Task<Void> task)
+            firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(task -> {
+                if (task.isComplete())
                 {
-                    if (task.isComplete())
-                    {
-                        // Verify Email
-                       // firebaseUser.sendEmailVerification();
+                    // Verify Email
+                   // firebaseUser.sendEmailVerification();
 
-                        Toast.makeText(UpdateEmailActivity.this, "Email mới đã được cập nhật. Vui lòng xác thực email!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
-                        intent.putExtra("BackToProfile", 1);
-                        startActivity(intent);
-                        finish();;
-                    }
-
-
-                    else
-                    {
-                        try
-                        {
-                            throw Objects.requireNonNull(task.getException());
-                        }
-                        catch (Exception e)
-                        {
-                            curentPassword.setError("Email ko chinh xac!");
-                            curentPassword.requestFocus();
-                        }
-                    }
-                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(UpdateEmailActivity.this, "Email mới đã được cập nhật. Vui lòng xác thực email!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UpdateEmailActivity.this, UpdateProfileActivity.class);
+                    newEmail.setText(intent.getStringExtra("email"));
+                    startActivity(intent);
+                    finish();;
                 }
+
+
+                else
+                {
+                    try
+                    {
+                        throw Objects.requireNonNull(task.getException());
+                    }
+                    catch (Exception e)
+                    {
+                        curentPassword.setError("Email ko chinh xac!");
+                        curentPassword.requestFocus();
+                    }
+                }
+                progressBar.setVisibility(View.GONE);
             });
         }
 

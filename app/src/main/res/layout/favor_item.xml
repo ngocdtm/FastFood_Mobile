@@ -8,8 +8,8 @@
     android:layout_marginEnd="8dp">
     <ImageView
         android:id="@+id/favImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
         android:src="@drawable/burger"
         android:scaleType="centerCrop"/>
 
