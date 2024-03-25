@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.foodnhanh.R;
 
+//====================================Màn hình chờ====================================//
 public class SplashActivity extends AppCompatActivity {
 
     @Override

@@ -122,7 +122,7 @@ public class UploadProfilePictureActivity extends AppCompatActivity
                 @Override
                 public void onFailure(@NonNull Exception e)
                 {
-                    Toast.makeText(UploadProfilePictureActivity.this,"Không có hien anh omg!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UploadProfilePictureActivity.this,"Không thể hiện ảnh!", Toast.LENGTH_LONG).show();
                 }
             });
         }

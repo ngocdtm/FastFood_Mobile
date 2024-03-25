@@ -68,10 +68,4 @@ dependencies {
     implementation ("com.scwang.smartrefresh:SmartRefreshLayout:1.1.0")
     implementation ("com.scwang.smartrefresh:SmartRefreshHeader:1.1.0")
 
-
-
-
-
-
-
 }

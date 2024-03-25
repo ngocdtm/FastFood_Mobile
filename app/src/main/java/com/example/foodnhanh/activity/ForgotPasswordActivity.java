@@ -51,13 +51,13 @@ public class ForgotPasswordActivity extends AppCompatActivity
                 if (email.isEmpty())
                 {
                     Toast.makeText(ForgotPasswordActivity.this, "Vui lòng điền email đã đăng ký!", Toast.LENGTH_LONG);
-                    ForgotPass_email.setError("Email is required");
+                    ForgotPass_email.setError("Cần điền Email!");
                     ForgotPass_email.requestFocus();
                 }
                 else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
                 {
                     Toast.makeText(ForgotPasswordActivity.this, "Email không tồn tại. Vui lòng điền email đã đăng ký!", Toast.LENGTH_LONG);
-                    ForgotPass_email.setError("Email is required");
+                    ForgotPass_email.setError("Cần điền Email!");
                     ForgotPass_email.requestFocus();
                 }
                 else

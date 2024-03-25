@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(LoginActivity.this, "You can reset password now!", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Bây giờ bạn có thể đặt lại mật khẩu", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
                 finish();
             }

@@ -86,7 +86,7 @@ public class InfoActivity extends AppCompatActivity implements LoaderManager.Loa
             int basePrice = 50000;
             // because we dont want the quantity go less than 0
             if (quantity == 0) {
-                Toast.makeText(InfoActivity.this, "Cant decrease quantity < 0", Toast.LENGTH_SHORT).show();
+                Toast.makeText(InfoActivity.this, "Không thể giảm nữa!", Toast.LENGTH_SHORT).show();
             } else {
                 quantity--;
                 displayQuantity();

@@ -47,7 +47,7 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
         addtoCart = findViewById(R.id.addtocart);
         addFries = findViewById(R.id.addCream);
 
-        // setting the name of food
+        // Đặt tên cho món ăn
 
         foodName.setText("Chicken");
 
@@ -79,7 +79,7 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
             int basePrice = 100000;
             // because we dont want the quantity go less than 0
             if (quantity == 0) {
-                Toast.makeText(ChickenActivity.this, "Cant decrease quantity < 0", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChickenActivity.this, "Không thể giảm nữa", Toast.LENGTH_SHORT).show();
             } else {
                 quantity--;
                 displayQuantity();
@@ -128,16 +128,14 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
         if (mCurrentCartUri == null) {
             Uri newUri = getContentResolver().insert(OrderContract.OrderEntry.CONTENT_URI, values);
             if (newUri==null) {
-                Toast.makeText(this, "Failed to add to Cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Thêm vào giỏ thất bại", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Success  adding to Cart", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(this, "Thêm vào giỏ thành công", Toast.LENGTH_SHORT).show();
             }
         }
 
         hasAllRequiredValues = true;
         return true;
-
     }
 
     private int CalculatePrice(CheckBox addSalad, CheckBox addFries) {
@@ -148,12 +146,10 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
             // add the Salad cost 20000
             basePrice = basePrice + 20000;
         }
-
         if (addFries.isChecked()) {
             // Fries cost is 30000
             basePrice = basePrice + 30000;
         }
-
         return basePrice * quantity;
     }
 
@@ -191,7 +187,6 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
             int price = cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_PRICE);
             int quantity = cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY);
 
-
             String nameof= cursor.getString(name);
             String priceof = cursor.getString(price);
             String quantityof = cursor.getString(quantity);
@@ -200,17 +195,12 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
             foodPrice.setText(priceof);
             quantitynumber.setText(quantityof);
         }
-
-
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
-
         foodName.setText("");
         foodPrice.setText("");
         quantitynumber.setText("");
-
     }
 }

@@ -57,7 +57,7 @@ public class ChangePasswordActivity extends AppCompatActivity
         assert firebaseUser != null;
         if (firebaseUser.equals(""))
         {
-            Toast.makeText(ChangePasswordActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ChangePasswordActivity.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ChangePasswordActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
             finish();

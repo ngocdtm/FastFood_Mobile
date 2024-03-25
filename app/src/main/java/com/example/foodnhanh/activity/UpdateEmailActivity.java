@@ -68,7 +68,7 @@ public class UpdateEmailActivity extends AppCompatActivity
 
         if (firebaseUser.equals(""))
         {
-            Toast.makeText(UpdateEmailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateEmailActivity.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -114,10 +114,10 @@ public class UpdateEmailActivity extends AppCompatActivity
 
                         Toast.makeText(UpdateEmailActivity.this, "Mật khẩu đã được xác thực. Bạn có thể thay đổi Email mới!", Toast.LENGTH_SHORT).show();
 
-                        txtViewAuthenticated.setText("Bạn đã xác thực thành công. Hãy cập nhật email mới");
+                        txtViewAuthenticated.setText("Bạn đã xác thực thành công. Hãy cập nhật Email mới");
 
 
-                        // Đổi màu button thay đổi emai
+                        // Đổi màu button thay đổi email
                         btn_savenewEmail.setBackgroundTintList(ContextCompat.getColorStateList(UpdateEmailActivity.this, R.color.dargGreen));
 
                         btn_savenewEmail.setOnClickListener(new View.OnClickListener()
@@ -141,7 +141,7 @@ public class UpdateEmailActivity extends AppCompatActivity
                         }
                         catch (Exception e)
                         {
-                            Toast.makeText(UpdateEmailActivity.this," Ko coa thay doi ne huhu", Toast.LENGTH_LONG).show();
+                            Toast.makeText(UpdateEmailActivity.this,"Không có thay đổi", Toast.LENGTH_LONG).show();
                         }
                     }
                     progressBar.setVisibility(View.VISIBLE);

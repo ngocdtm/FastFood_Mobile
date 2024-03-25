@@ -59,7 +59,7 @@ public class UpdateProfileActivity extends AppCompatActivity
 
         if (firebaseUser == null)
         {
-            Toast.makeText(UpdateProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateProfileActivity.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -150,7 +150,7 @@ public class UpdateProfileActivity extends AppCompatActivity
         //Setup the Alert Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
         builder.setTitle("Email chưa được xác thực!");
-        builder.setMessage("Vui lòng xác thực email. Bạn sẽ không thể đăng nhập lại lần tới nếu chưa xác thực email!");
+        builder.setMessage("Vui lòng xác thực Email. Bạn sẽ không thể đăng nhập lại lần tới nếu chưa xác thực Email!");
 
         // Open Email app if User click Continue Button
         builder.setPositiveButton("Continue", new DialogInterface.OnClickListener()
@@ -287,7 +287,7 @@ public class UpdateProfileActivity extends AppCompatActivity
                 }
                 else
                 {
-                    Toast.makeText(UpdateProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateProfileActivity.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }
@@ -295,7 +295,7 @@ public class UpdateProfileActivity extends AppCompatActivity
             @Override
             public void onCancelled(@NonNull DatabaseError error)
             {
-                Toast.makeText(UpdateProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateProfileActivity.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });

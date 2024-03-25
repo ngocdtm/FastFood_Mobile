@@ -63,7 +63,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         //getSupportActionBar().setTitle("Signup");
-        Toast.makeText(SignupActivity.this,"You can signup now!", Toast.LENGTH_LONG).show();
+        Toast.makeText(SignupActivity.this,"Bây giờ bạn có thể đăng nhập!", Toast.LENGTH_LONG).show();
 
         signupfullName = findViewById(R.id.signup_fullName);
         signupEmail = findViewById(R.id.signup_email);

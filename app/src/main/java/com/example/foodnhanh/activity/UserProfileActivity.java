@@ -48,11 +48,10 @@ Intent intent;
 
         if(firebaseUser==null)
         {
-            Toast.makeText(UserProfileActivity.this, "Something went wrong! User's detail are not available at the moment.", Toast.LENGTH_LONG).show();
+            Toast.makeText(UserProfileActivity.this, "Đã xảy ra lỗi! Chi tiết người dùng hiện tại không có.", Toast.LENGTH_LONG).show();
         }
         else
         {
-
             showUserProfile(firebaseUser);
         }
 
@@ -128,14 +127,14 @@ Intent intent;
                 }
                 else
                 {
-                    Toast.makeText(UserProfileActivity.this, "Some thing went wrong!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserProfileActivity.this, "Đã xảy ra lỗi!", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error)
             {
-                Toast.makeText(UserProfileActivity.this, "Some thing went wrong!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserProfileActivity.this, "Đã xảy ra lỗi!", Toast.LENGTH_LONG).show();
             }
         });
     }
