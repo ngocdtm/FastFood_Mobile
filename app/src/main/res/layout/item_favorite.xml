@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:elevation="4dp"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardImg"
+            android:layout_marginLeft="20dp"
+            app:cardCornerRadius="8dp"
+            android:elevation="4dp"
+            android:translationZ="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/itemFavoImg"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:src="@color/green"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/itemFavoName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@id/CardImg"
+            android:singleLine="true"
+            android:text="Food Name"
+            android:textSize="28dp"
+          />
+        <TextView
+            android:id="@+id/itemFavoPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/CardImg"
+            android:layout_below="@+id/itemFavoName"
+            android:layout_marginLeft="50dp"
+            android:text="Price: "
+            android:textSize="20sp"
+         />
+    </RelativeLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/itemFavoCardButton"
+        android:layout_gravity="end|bottom"
+        android:layout_width="wrap_content"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="8dp"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/itemFavoButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/baseline_favorite_24">
+
+        </ImageButton>
+    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
