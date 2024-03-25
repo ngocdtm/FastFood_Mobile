@@ -9,7 +9,7 @@
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:layout_scrollFlags="scroll|enterAlways"
     app:menu="@menu/nav_menu"
-    app:title="Fast Food 🤤😋"
+    app:title="Fast Food"
     android:background="@color/blue">
 
 </androidx.appcompat.widget.Toolbar>
