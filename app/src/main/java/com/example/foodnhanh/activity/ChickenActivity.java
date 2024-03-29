@@ -83,6 +83,8 @@ public class ChickenActivity extends AppCompatActivity implements LoaderManager.
             } else {
                 quantity--;
                 displayQuantity();
+
+
                 int Price = basePrice * quantity;
                 String setnewPrice = String.valueOf(Price);
                 foodPrice.setText(setnewPrice);

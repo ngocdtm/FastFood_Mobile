@@ -40,7 +40,7 @@ EditText img_url,name,price;
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddProActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddProActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }

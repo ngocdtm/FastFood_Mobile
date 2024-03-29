@@ -33,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView txtName;
     Button btnViewProfile, btnLogout, btnchangePass;
     String fullName;
+    Button btnAdd,btnEditAndDelete;
 
     FirebaseAuth authProfile;
 
@@ -46,7 +47,22 @@ public class ProfileActivity extends AppCompatActivity {
         txtName =findViewById(R.id.setting_name);
         btnViewProfile =findViewById(R.id.viewProfile);
         btnLogout = findViewById(R.id.btnLogout);
-
+        //AddPro
+        btnAdd=findViewById(R.id.AddPro);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),AddProActivity.class));
+            }
+        });
+        //DeletePro And EditPro
+        btnEditAndDelete=findViewById(R.id.DeAndEdPro);
+        btnEditAndDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),DeleteAndEditActivity.class));
+            }
+        });
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
 

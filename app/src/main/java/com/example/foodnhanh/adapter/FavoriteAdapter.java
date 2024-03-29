@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,7 +70,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         setFavorite(food.getId(), holder);
         holder.favoName.setText(food.getName());
         //fix price
-            holder.favoPrice.setText(food.getPrice()+"");
+        holder.favoPrice.setText(String.valueOf(food.getPrice()));
         Glide.with(context)
                 .load(food.getImg_url())
                 .into(holder.favoImg);
@@ -96,7 +94,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     protected void removeFromFavorite(String foodIdToRemove, FavoriteViewHolder holder){
         if(firebaseAuth.getCurrentUser() == null){
             Toast.makeText(context,R.string.isNotLogin, Toast.LENGTH_SHORT).show();
-            return;
+
         }else {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
             reference.child(firebaseAuth.getUid()).child("Favorites").child(foodIdToRemove)

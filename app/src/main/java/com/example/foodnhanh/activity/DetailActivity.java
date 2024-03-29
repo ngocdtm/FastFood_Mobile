@@ -1,10 +1,6 @@
 package com.example.foodnhanh.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -15,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.foodnhanh.R;
@@ -52,7 +51,7 @@ String id1;
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_detail);
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
-        sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
+     //   sharedPreferences = this.getSharedPreferences("user_session", Context.MODE_PRIVATE);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         setContentView(binding.getRoot());
@@ -64,7 +63,7 @@ String id1;
         btnBack = findViewById(R.id.btnBack);
         //detail from MainAdapter
         id1 = intent.getStringExtra("id");
-      setFavorite();
+       setFavorite();
         onClickEvent();
         Glide.with(detailimg).load(intent.getStringExtra("i")).into(detailimg);
         int price1 = intent.getIntExtra("p", 1);

@@ -1,15 +1,14 @@
 package com.example.foodnhanh.activity;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodnhanh.R;
 import com.example.foodnhanh.adapter.FavoriteAdapter;
@@ -31,11 +30,11 @@ import java.util.List;
 public class FavoriteActivity extends AppCompatActivity {
     BottomNavigationView nav;
 
-    ActivityFavoriteBinding binding;
+   ActivityFavoriteBinding binding;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     FavoriteAdapter adapter;
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     public interface OnDataLoadedListener {
         void onDataLoaded(List<MainModel> foodfastList);
@@ -43,10 +42,10 @@ public class FavoriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_favorite);
+        setContentView(R.layout.activity_favorite);
         binding = ActivityFavoriteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        recyclerView=findViewById(R.id.favoFmRcv);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         loadMangas(new OnDataLoadedListener() {
@@ -65,7 +64,6 @@ public class FavoriteActivity extends AppCompatActivity {
         nav = findViewById(R.id.bottomNavigation);
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-
             if (id == R.id.favorite) {
                 Intent intent = new Intent(FavoriteActivity.this, FavoriteActivity.class);
                 startActivity(intent);
@@ -73,7 +71,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 return true;
 
             }
-          else if (id == R.id.profile) {
+            else if (id == R.id.profile) {
 
                 Intent intent = new Intent(FavoriteActivity.this, ProfileActivity.class);
                 startActivity(intent);
@@ -81,7 +79,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 return true;
 
             }
-          else  if (id == R.id.cart) {
+            else  if (id == R.id.cart) {
                 Intent intent = new Intent(FavoriteActivity.this, SummaryActivity.class);
                 startActivity(intent);
 
@@ -103,7 +101,6 @@ public class FavoriteActivity extends AppCompatActivity {
         adapter.setData(foodList);
         binding.favoFmRcv.setLayoutManager(new GridLayoutManager(this, 1));
         binding.favoFmRcv.setAdapter(adapter);
-
     }
     private void loadMangas(OnDataLoadedListener listener) {
         String uid = currentUser.getUid();
@@ -149,8 +146,5 @@ public class FavoriteActivity extends AppCompatActivity {
                 Toast.makeText(FavoriteActivity.this, R.string.loadingInterupted, Toast.LENGTH_SHORT).show();
             }
         });
-        }
     }
-
-
-
+}

@@ -42,8 +42,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
-
     List<Model> modelList;
     FirebaseAuth authProfile;
 
@@ -53,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
     //Line 1
     MainAdapter mainAdapter;
     RecyclerView recyclerView;
-    Button btnAdd;
-
     MenuItem menuItem;
 Spinner spinner;
 public static final String[] language= new String[]{"Select Language", "English", "Japanese"};
@@ -77,14 +73,7 @@ public static final String[] language= new String[]{"Select Language", "English"
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.rv);
 
-        //AddPro
-        btnAdd=findViewById(R.id.AddPro);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),AddProActivity.class));
-            }
-        });
+
 
         //Language Spinner
         spinner = findViewById(R.id.spinner);
@@ -137,12 +126,8 @@ public static final String[] language= new String[]{"Select Language", "English"
 
             }
            else if (id == R.id.favorite) {
-                 if (authProfile.getCurrentUser() == null) {
-                     Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập! Không có Product Favorite để hiển thị.", Toast.LENGTH_LONG).show();
-                     showAlertDialog();
 
 
-                 } else {
 
 
                  Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
@@ -150,7 +135,7 @@ public static final String[] language= new String[]{"Select Language", "English"
                  finish();
 
                  return true;
-             }
+
 
             }
            else if (id == R.id.cart) {

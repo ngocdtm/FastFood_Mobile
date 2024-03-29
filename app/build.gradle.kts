@@ -58,14 +58,18 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.7.7")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation ("com.makeramen:roundedimageview:2.3.0")
     testImplementation("junit:junit:4.13.2")
+    //Banner
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
-    implementation ("com.airbnb.android:lottie:4.2.2")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
-    implementation ("com.scwang.smartrefresh:SmartRefreshLayout:1.1.0")
-    implementation ("com.scwang.smartrefresh:SmartRefreshHeader:1.1.0")
+
+    implementation ("com.airbnb.android:lottie:4.2.2")
+
+
+    //UpdatePro
+    implementation ("com.orhanobut:dialogplus:1.11@aar")
 
 }
